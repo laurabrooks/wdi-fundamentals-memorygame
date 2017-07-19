@@ -24,17 +24,20 @@ h2 {
 
 a {
   font-family: "Raleway", sans-serif;
-  /*text-transform: uppercase;*/
-  color: #F15B31;
+  text-transform: uppercase;
+  /*color: #F15B31;*/
+  color: white;
   letter-spacing: 1px;
   font-weight: 600;
   font-size: 18px;
   margin: 0 20px;
   border-bottom: 2px solid transparent;
+  text-decoration: none; /**/
 }
 
 a:hover {
   border-color: white;
+  color: white;
 }
 
 p {
