@@ -6,7 +6,7 @@ body {
 h1 {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
-  color: #0D2C40;
+  color: white;
   letter-spacing: 1px;
   font-weight: 400;
   font-size: 45px;
@@ -95,4 +95,48 @@ footer {
 .name {
   color: #F15B31;
   font-weight: 700;
+}
+
+/*button styling modelled off this post http://callmenick.com/post/stylish-css-buttons*/
+
+button {
+  background-color: #F15B31;
+  border: none;
+  border-radius: 13px;
+  box-shadow: 0 10px #5c2414;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-size: 20px;
+  margin: 35px 0;
+  padding: 15px;
+}
+
+button:hover,
+button.hover {
+  background-color: #b84829;
+}
+
+button:active,
+button.active {
+  background-color: #b84829;
+  box-shadow: 0 5px #5c2414;
+  transform: translateY(5px);
+
+}
+
+button:focus {
+  outline:0;
+}
+
+
+.stupid {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  color: #F15B31;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-size: 45px;
+  margin: 0;
 }
