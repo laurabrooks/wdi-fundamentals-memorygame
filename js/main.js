@@ -25,22 +25,15 @@ var cards = [
   }
 ];
 var cardsInPlay = [];
+var dealt = false;
 
 
 var checkForMatch = function() {
-  if (cardsInPlay.length === 2) {
     if (cardsInPlay[0].rank === cardsInPlay[1].rank) {
       alert("You found a match!");
-
-
-
-
     } else {
       alert("Sorry, try again.");
     }
-
-    //here we should flip everything to face down
-  }
 }
 
 
@@ -52,7 +45,6 @@ var flipCard = function() {
     cardsInPlay.push(cards[cardID]);
     cards[cardID].faceUp = true;
     this.setAttribute("src", cards[cardID].cardImage);
-    checkForMatch();
   }
   else { //card is face-up and we flip it back down
     if (cardsInPlay.length > 1){ //takes the card flipped down out of play
@@ -63,25 +55,47 @@ var flipCard = function() {
     }
     this.setAttribute("src", "images/back.png")
     cards[cardID].faceUp = false;
-    checkForMatch();
   }
-  console.log("cardsInPlay " + cardsInPlay.length);
+  if (cardsInPlay.length === 2){
+    setTimeout(checkForMatch, 200);
+  }
 }
 
-
-
+// flips all cards to face down and takes all cards out of play for a new board
+var flipToShuffle = function() {
+  for (var i = 0; i < cards.length; i++) {
+    var curCard = document.getElementById("game-board").childNodes[i];
+    curCard.setAttribute("src", "images/back.png");
+    cards[i].faceUp = false;
+    cardsInPlay = [];
+  }
+}
 
 var createBoard = function() {
+  // shuffle functionality from https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+  var j, x, iter;
+  for (iter = cards.length; iter; iter--) {
+    j = Math.floor(Math.random() * iter);
+    x = cards[iter - 1];
+    cards[iter - 1] = cards[j];
+    cards[j] = x;
+  }
+
   for (var i = 0; i < cards.length; i++){
     var cardElement = document.createElement("img");
-    cardElement.setAttribute("src", "images/back.png");
-    cardElement.setAttribute("data-id", i);
 
-    cardElement.addEventListener("click", flipCard);
+    if (!dealt) { //this is the first deal
+      cardElement.setAttribute("src", "images/back.png");
+      cardElement.setAttribute("data-id", i);
+      document.getElementById("game-board").appendChild(cardElement);
 
-    document.getElementById("game-board").appendChild(cardElement);
+      cardElement.addEventListener("click", flipCard);
+    }
   }
+
+  dealt = true;
+  flipToShuffle();
 }
 
-
+document.getElementById("shuffle").addEventListener("click", createBoard);
 createBoard();
